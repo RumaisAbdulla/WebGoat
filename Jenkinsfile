@@ -1,32 +1,29 @@
 pipeline {
     agent any
-    tools {
-        maven 'Default Maven'
-    }
 
     stages {
       
         stage('Build') {
             steps {
-                // script {
-                    // if (isUnix()) {
+                script {
+                    if (isUnix()) {
                         sh 'mvn package -DskipTests'
-                    // } else {
-                        // bat 'mvn package -DskipTests'
-                    // }
-                // }
+                    } else {
+                        bat 'mvn package -DskipTests'
+                    }
+                }
             }
         }
         
-        // stage('SonarQube Analysis') {
-        //     steps{
-        //         script{
-        //              def scannerHome = tool 'sonar-local';
-        //              withSonarQubeEnv() {
-        //             bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Webgoatfinal -Dsonar.java.binaries=target/classes"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+            steps{
+                script{
+                     def scannerHome = tool 'sonar-local';
+                     withSonarQubeEnv() {
+                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Webgoatfinal -Dsonar.java.binaries=target/classes"
+                    }
+                }
+            }
+        }
     }
 }
