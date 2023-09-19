@@ -9,7 +9,7 @@ pipeline {
                     if (isUnix()) {
                         sh 'mvn package -DskipTests'
                     } else {
-                        bat 'mvn -DskipTests clean install -X'
+                        bat 'mvn clean package -DskipTests'
                     }
                 }
             }
