@@ -9,9 +9,7 @@ import java.util.Random;
  * @since 8/17/17.
  */
 public class PasswordResetLink {
-    SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
-    byte bytes[] = new byte[20];
-    random.nextBytes(bytes);
+    private random = new SecureRandom();
    
   public String createPasswordReset(String username, String key) {
       
