@@ -9,7 +9,7 @@ import java.util.Random;
  * @since 8/17/17.
  */
 public class PasswordResetLink {
-    private random = new Random();
+    private Random random = new Random();
    
   public String createPasswordReset(String username, String key) {
       
