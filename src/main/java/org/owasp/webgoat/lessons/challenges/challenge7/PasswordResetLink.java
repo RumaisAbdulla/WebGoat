@@ -17,13 +17,13 @@ public class PasswordResetLink {
       // Admin has a fix reset link
       this.random.setSeed(key.length());
     }
-    return scramble(random, scramble(random, scramble(random, MD5.getHashString(username))));
+    return scramble(this.random, scramble(this.random, scramble(this.random, MD5.getHashString(username))));
   }
 
   public static String scramble(Random random, String inputString) {
     char[] a = inputString.toCharArray();
     for (int i = 0; i < a.length; i++) {
-      int j = random.nextInt(a.length);
+      int j = this.random.nextInt(a.length);
       char temp = a[i];
       a[i] = a[j];
       a[j] = temp;
