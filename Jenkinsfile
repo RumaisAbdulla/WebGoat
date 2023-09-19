@@ -20,16 +20,16 @@ pipeline {
             }
         }
 
-    //     stage('OWASP Dependency-Check Vulnerabilities') {
-    //   steps {
-    //     dependencyCheck additionalArguments: ''' 
-    //                 -o './'
-    //                 -s './'
-    //                 -f 'ALL' 
-    //                 --prettyPrint''', odcInstallation: 'dependency-check'
+        stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'dependency-check'
         
-    //     dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-    //   }
-    // }
+        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
+    }
     }
 }
