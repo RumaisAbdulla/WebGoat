@@ -2,13 +2,18 @@ pipeline {
 	agent any
 	
 	stages {
-		
-		stage('COMPILE') {
+        
+        stage('COMPILE') {
 			steps {
-				bat 'mvn clean compile -DskipTests'
+				bat 'mvn clean compile'
 			}
 		}
         
+        stage('TEST') {
+			steps {
+				bat 'mvn test'
+			} 
+            
         stage('SONARQUBE ANALYSIS') {
             steps{
                 script{
@@ -19,11 +24,17 @@ pipeline {
                 }
             }
         }
+            
+		stage('BUILD') {
+			steps {
+				bat 'mvn clean package'
+			}
+		}
 		
 		stage('OWASP SCAN') {
 			steps {
 				dependencyCheck additionalArguments:  '--scan ./', odcInstallation: 'dependency-check'
-				dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 			}
 		}
 		
