@@ -5,13 +5,13 @@ pipeline {
       
         stage('Build') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn package -DskipTests'
-                    } else {
+                // script {
+                    // if (isUnix()) {
+                    //     sh 'mvn package -DskipTests'
+                    // } else {
                         bat 'mvn -B -DskipTests clean package'
-                    }
-                }
+                    // }
+                // }
             }
         }
         
