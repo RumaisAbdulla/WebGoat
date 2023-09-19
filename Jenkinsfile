@@ -13,6 +13,7 @@ pipeline {
 			steps {
 				bat 'mvn test'
 			} 
+        }
             
         stage('SONARQUBE ANALYSIS') {
             steps{
