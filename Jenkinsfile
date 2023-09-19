@@ -5,13 +5,13 @@ pipeline {
       
         stage('Build') {
             steps {
-                // script {
-                    // if (isUnix()) {
-                    //     sh 'mvn package -DskipTests'
-                    // } else {
+                script {
+                    if (isUnix()) {
+                        sh 'mvn package -DskipTests'
+                    } else {
                         bat 'mvn -B -DskipTests clean package'
-                    // }
-                // }
+                    }
+                }
             }
         }
         
@@ -25,5 +25,17 @@ pipeline {
                 }
             }
         }
+
+        stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'dependency-check'
+        
+        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
+    }
     }
 }
