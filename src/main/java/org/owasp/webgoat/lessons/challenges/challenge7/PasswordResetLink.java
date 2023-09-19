@@ -9,9 +9,9 @@ import java.util.Random;
  * @since 8/17/17.
  */
 public class PasswordResetLink {
-
+   private Random random = new Random();
   public String createPasswordReset(String username, String key) {
-    Random random = new Random();
+      
     if (username.equalsIgnoreCase("admin")) {
       // Admin has a fix reset link
       random.setSeed(key.length());
@@ -22,7 +22,7 @@ public class PasswordResetLink {
   public static String scramble(Random random, String inputString) {
     char[] a = inputString.toCharArray();
     for (int i = 0; i < a.length; i++) {
-      int j = random.nextInt(a.length);
+      int j = this.random.nextInt(a.length);
       char temp = a[i];
       a[i] = a[j];
       a[j] = temp;
